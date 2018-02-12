@@ -17,12 +17,31 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(books)
       this.setState({ books })
     })
   }
 
+  moveToCategory = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(books => {
+      book.shelf = newShelf
+      this.setState(state => ({
+        books: state.books.filter((b) => b.id !== book.id).concat([ book ])
+      }))
+    })
+  }
+
   render() {
+    let showingCategories = [{
+      name: "Currently Reading",
+      value: "currentlyReading"
+    },{
+      name: "Want to Read",
+      value: "wantToRead"
+    },{
+      name: "Read",
+      value: "read"
+    }] 
+
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -53,9 +72,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <ListBooks shelfName="Currently Reading" books={this.state.books.filter(book => book.shelf === "currentlyReading")}/>
-                <ListBooks shelfName="Want to Read" books={this.state.books.filter(book => book.shelf === "wantToRead")}/>
-                <ListBooks shelfName="Read" books={this.state.books.filter(book => book.shelf === "read")}/>
+                {showingCategories.map((category) => (
+                  <ListBooks onMoveCategory={this.moveToCategory} shelfName={category.name} books={this.state.books.filter(book => book.shelf === category.value)}/>
+                ))}
               </div>
             </div>
             <div className="open-search">
