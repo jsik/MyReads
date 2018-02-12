@@ -73,7 +73,7 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
                 {showingCategories.map((category) => (
-                  <ListBooks onMoveCategory={this.moveToCategory} shelfName={category.name} books={this.state.books.filter(book => book.shelf === category.value)}/>
+                  <ListBooks key={category.value} onMoveCategory={this.moveToCategory} shelfName={category.name} books={this.state.books.filter(book => book.shelf === category.value)}/>
                 ))}
               </div>
             </div>
