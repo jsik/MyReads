@@ -29,6 +29,7 @@ class SearchBooks extends Component {
 
 	render() {
     const { query, books } = this.state
+    const { moveToCategory } = this.props
 		return (
 			<div className="search-books">
       	<div className="search-books-bar">
@@ -39,7 +40,7 @@ class SearchBooks extends Component {
         		</div>
       	</div>
       	<div className="search-books-results">
-        	<ListBooks key="search" onMoveCategory={this.moveToCategory} books={books}/>
+        	<ListBooks key="search" onMoveCategory={moveToCategory} books={books}/>
       	</div>
         {query.length > 0 && books.length === 0 && (
           <div className='msg'>
