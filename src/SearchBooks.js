@@ -39,9 +39,11 @@ class SearchBooks extends Component {
               onChange={(event) => this.updateQuery(event.target.value)} />
         		</div>
       	</div>
-      	<div className="search-books-results">
-        	<ListBooks key="search" onMoveCategory={moveToCategory} books={books}/>
-      	</div>
+        {query.length > 0 && books.length > 0 && (
+        	<div className="search-books-results">
+          	<ListBooks key="search" onMoveCategory={moveToCategory} books={books}/>
+        	</div>
+        )}
         {query.length > 0 && books.length === 0 && (
           <div className='msg'>
             <span>No book is found</span>

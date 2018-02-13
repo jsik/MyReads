@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
                 {showingCategories.map((category) => (
-                  <div className="bookshelf">
+                  <div className="bookshelf" key={category.value}>
                     <h2 className="bookshelf-title">{category.name}</h2>
                     <div className="bookshelf-books">
                       <ListBooks key={category.value} onMoveCategory={this.moveToCategory} books={this.state.books.filter(book => book.shelf === category.value)}/>
@@ -62,7 +62,7 @@ class BooksApp extends React.Component {
           </div>
         )}/>
         <Route exact path="/search" render={(history) => (
-          <SearchBooks moveToCategory={this.moveToCategory} />
+          <SearchBooks key="searchBooks" moveToCategory={this.moveToCategory} />
         )}/>
       </div>
     )
