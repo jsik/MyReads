@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import sortBy from 'sort-by'
 
 class ListBooks extends Component {
 	change = (book, e) => {
@@ -8,18 +7,13 @@ class ListBooks extends Component {
       	}
 	}
 	render() {
-
 		const { books } = this.props 
-		let showingBooks = books
-
-		showingBooks.sort(sortBy('name'))
-
 		return (
 			<div className="bookshelf">
                 <h2 className="bookshelf-title">{this.props.shelfName}</h2>
 				<div className="bookshelf-books">
 					<ol className="books-grid">
-					{showingBooks.map((book) => (
+					{books.map((book) => (
 						<li key={book.id}>
 							<div className="book">
 							  <div className="book-top">

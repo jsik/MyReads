@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { Link, Route  } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class SearchBooks extends Component {
-	static propTypes = {
-    	
-    }
 	render() {
 		return (
 			<div className="search-books">
