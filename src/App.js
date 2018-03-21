@@ -10,10 +10,9 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    })
+  async componentDidMount() {
+    const books = await BooksAPI.getAll()
+    this.setState({ books })
   }
 
   moveToCategory = (book, newShelf) => {
@@ -50,7 +49,12 @@ class BooksApp extends React.Component {
                   <div className="bookshelf" key={category.value}>
                     <h2 className="bookshelf-title">{category.name}</h2>
                     <div className="bookshelf-books">
-                      <ListBooks key={category.value} onMoveCategory={this.moveToCategory} books={this.state.books.filter(book => book.shelf === category.value)}/>
+                      <ListBooks 
+                        key={category.value} 
+                        onMoveCategory={this.moveToCategory} 
+                        books={this.state.books.filter(book => book.shelf === category.value)}
+                        booksOnShelf={this.state.books}
+                      />
                     </div>
                   </div>
                 ))}
@@ -62,7 +66,11 @@ class BooksApp extends React.Component {
           </div>
         )}/>
         <Route exact path="/search" render={(history) => (
-          <SearchBooks key="searchBooks" moveToCategory={this.moveToCategory} />
+          <SearchBooks 
+            key="searchBooks" 
+            moveToCategory={this.moveToCategory} 
+            booksOnShelf={this.state.books}
+          />
         )}/>
       </div>
     )
